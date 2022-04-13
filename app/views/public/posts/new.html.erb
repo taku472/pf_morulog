@@ -1,0 +1,10 @@
+<h1>画像投稿フォーム</h1>
+  <%= form_with model: @post ,url: public_posts_path do |f| %>
+    <h4>画像</h4>
+      <%= f.file_field :posted_image, accept: "image/*" %>
+    <h4>タイトル</h4>
+      <%= f.text_field :title %>
+    <h4>内容</h4>
+      <%= f.text_field :body %>
+    <%= f.submit '投稿' %>
+  <% end %>
