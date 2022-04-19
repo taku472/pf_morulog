@@ -5,25 +5,27 @@ class Public::PostsController < ApplicationController
 
   def create
     @post =Post.new(post_params)
-
     @post.customer_id = current_customer.id
-    @post.save
-    redirect_to public_post_path(@post)
+    if @post.save
+      redirect_to public_posts_path(current_customer)
+    else
+      render :new
+    end
   end
 
   def index
-    @posts = Post.all
-
-    logger.debug(@posts)
+    @posts = Post.page(params[:page])
   end
 
   def show
-  end
-
-  def edit
+    @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to public_posts_path
   end
 
   private

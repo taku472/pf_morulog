@@ -1,0 +1,72 @@
+<header>
+  <div class="row justify-content-center">
+  <%= link_to root_path, :style => "color: #000000;", class:"navbar-brand" do %>
+    <h2><%= image_tag 'IMG_7923.jpg', size: "30x30" %><span>morulog</span></h2>
+  <% end %>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarNavDropdown" >
+    <ul class="navbar-nav mr-auto justify-content-start">
+      <% if customer_signed_in? %>
+      <li><p class="logincustomer nav-link text-light">ようこそ<%= current_customer.first_name + current_customer.last_name %>さん！</p></li> <!--  文字の位置と色  -->
+      <li>
+        <%= link_to customer_path(current_customer.id), class: "nav-link text-light" do %>
+        <i class="fas fa-user"></i>マイページ
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_public_post_path, class: "nav-link text-light" do %>
+        <i class="fa fa-rabbit"></i></i>投稿フォーム
+        <% end %>
+      </li>
+      <li>
+        <%= link_to customers_path, class: "nav-link text-light" do %>
+        <i class="fa-solid fa-cart-shopping"></i>ユーザー一覧
+        <% end %>
+      </li>
+      <li>
+        <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do %>
+        <i class="fas fa-sign-out-alt "></i>ログアウト
+        <% end %>
+      </li>
+       <% elsif admin_signed_in? %>
+        <li class"nav-item">
+         <%= link_to public_post_path, class: "btn btn-dark" do %>
+            投稿一覧
+          <% end %>
+        </li>
+        <li class"nav-item">
+         <%= link_to public_post_path, class: "btn btn-dark" do %>
+            ユーザー一覧
+         <% end %>
+        <li class"nav-item">
+         <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-dark" do %>
+            ログアウト
+         <% end %>
+        </li>
+      <% else %>
+      <li>
+        <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
+        <i class="fas fa-user-plus"></i>新規登録
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_customer_session_path, class: "nav-link text-light" do %>
+        <i class="fas fa-sign-in-alt"></i>ログイン
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+        <%= form_with url: public_posts_path, local: true, method: :get, class: "form-inline justify-content-end" do |f| %>
+          <%= f.text_field :name, class: "form-control mr-sm-2" %>
+          <%= f.submit "検索", class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+</header>

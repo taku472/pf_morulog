@@ -1,0 +1,46 @@
+<div class="post-detail py-5 bg-light">
+  <div class="card w-75 mx-auto mt-4 shadow-lg">
+    <%= image_tag @post.get_image, class:"card-img-top"; %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <%= image_tag @post.customer.get_profile_image(50, 50), class:"mt-3 rounded-circle"; %>
+        </div>
+        <div class="col-10">
+          <p class="card-title">
+            <strong><i class="far fa-flag"></i><span><%= @post.title %></span></strong>
+          </p>
+          <p class="card-text">説明：<%= @post.body %></p>
+          <span><i class="fas fa-user"></i> By <%= @post.customer.full_name %>　|　</span>
+          <span><i class="fa fa-calendar"></i><%= @post.created_at.strftime('%Y/%m/%d') %>　|　</span>
+          <span><i class="fa fa-comment"></i><%= @post.comments.count %>　|　 </span>
+          <% if @post.favorited_by?(current_customer) %>
+              <%= link_to public_post_favorites_path(@post), method: :delete do %>
+                <span><i class="fa fa-heart"></i><%= @post.favorites.count %></span>
+              <% end %>
+              　|
+            <% else %>
+              <%= link_to public_post_favorites_path(@post), method: :post do %>
+                <span><i class="fa fa-heart"></i><%= @post.favorites.count %></span>
+              <% end %>
+              　|
+          <% end %>
+          <% if @post.customer == current_customer %>
+            <span><%= link_to "削除", public_post_path(@post), method: :delete %></span>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <div class="comments card-text">
+        <h4 class="mt-3"><%= @post.comments.count %>件コメント</h4>
+      </div>
+      <hr>
+      <%= form_with model: [:public, @post, @comment] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :body, class:"form-control", rows: '5', placeholder: "コメントをここに" %>
+      </div>
+      <%= f.submit "送信", class:"btn btn-lg btn-block btn-info mt-4" %>
+      <% end %>
+    </div>
+  </div>
+</div>

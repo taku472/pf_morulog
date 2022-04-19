@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>プロフィール編集</h2>
+  <%= form_with model: @customer do |f| %>
+
+    <p><%= f.label :"姓" %>
+    <%= f.text_field :first_name, autofocus: true %></p>
+    <p><%= f.label :"名" %>
+    <%= f.text_field :last_name %></p>
+    <p><%= f.label :"プロフィール画像" %>
+    <%= f.file_field :profile_image, accept: "image/*" %></p>
+    <p><%= f.label :"誕生日" %>
+    <%= f.text_field :birthday %></p>
+    <p><%= f.label :"メールアドレス" %>
+    <%= f.text_field :email %></p>
+
+    <%= f.submit "更新する", class: "btn btn-sm btn-success" %>
+    <%= link_to "退会する", public_unsubscribe_path, class: "glyphicon glyphicon-home btn btn-primary" %>
+  <% end %>
+
+</div>

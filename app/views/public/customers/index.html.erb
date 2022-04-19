@@ -1,0 +1,25 @@
+<p id="notice"></p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <h2>Customers</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>トップ画</th>
+          <th>名前</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @customers.each do |customer| %>
+        <tr>
+          <td><%= image_tag customer.get_profile_image(100, 100) %></td>
+          <td><%= customer.full_name %></td>
+          <td><%= link_to 'Show', customer_path(customer.id) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,9 +1,1 @@
-<% @posts.each do |post| %>
-<div>
-  <%= image_tag post.get_image %>
-  <p>投稿ユーザー画像：<%= image_tag 'IMG_7923.jpg' %></p>
-  <p>タイトル：<%= post.title %></p>
-  <p>説明：<%= post.body %></p>
-  <p>ユーザーネーム：<%= post.customer.last_name %></p>
-</div>
-<% end %>
+<%= render 'list', posts: @posts %>
