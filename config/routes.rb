@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  #検索
+  get "search" => "searches#search"
+  get "search_result" => "searches#search_result"
+
   #public
   namespace :public do
     get "customers/unsubscribe" => "customers#unsubscribe", as: 'unsubscribe'
@@ -34,6 +38,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :posts
     resources :genres
-    resources :customers
+    resources :customers, only: [:index, :show, :edit, :update]
   end
 end
