@@ -62,10 +62,16 @@
       </li>
       <% end %>
     </ul>
-        <%= form_with url: public_posts_path, local: true, method: :get, class: "form-inline justify-content-end" do |f| %>
-          <%= f.text_field :name, class: "form-control mr-sm-2" %>
-          <%= f.submit "検索", class: "btn btn-danger" %>
-        <% end %>
+      <% if customer_signed_in? %>
+        <div class="search_form">
+          <%= form_with url: search_path, local: true, method: :get, class: "form-inline justify-content-end" do |f| %>
+            <%= f.text_field :word, class: "form-control mr-sm-2" %>
+            <%= f.select :range, options_for_select([['Customer'], ['Post']]) %>
+            <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backword_match"], ["部分一致","partial_match"]]) %>
+            <%= f.submit "検索", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      <% end %>
       </div>
     </div>
   </nav>

@@ -21,4 +21,19 @@ class Customer < ApplicationRecord
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+  #検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @customer = Customer.where("full_name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @customer = Customer.where("full_name LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("full_name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("full_name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
 end

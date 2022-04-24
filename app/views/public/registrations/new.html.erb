@@ -13,8 +13,8 @@
       <div class="form-group">
         <%= f.label :名前, class: "brown-border px-3" %>
         <div class="row">
-          <%= f.text_field :first_name, placeholder:"姓 例）長野", class: "form-control offset-1 col-5" %>
-          <%= f.text_field :last_name, placeholder:"名 例）恵子", class: "form-control offset-1 col-5" %>
+          <%= f.text_field :first_name, placeholder:"姓 例）盛本", class: "form-control offset-1 col-5" %>
+          <%= f.text_field :last_name, placeholder:"名 例）萌流美", class: "form-control offset-1 col-5" %>
         </div>
       </div>
 
@@ -25,7 +25,10 @@
 
       <div class="form-group">
         <%= f.label :誕生日, class: "brown-border px-3" %><br>
-        <%= f.text_field :birthday, autofocus: true, autocomplete: "email" %>
+        <%= f.date_select :birthday, use_month_numbers: true,
+          start_year: 1990, #入力値の開始位置(西暦)
+          end_year: (Time.now.year - 10) #入力値の終了位置(現在から10年前に指定)
+        %>
       </div>
 
       <div class="form-group">
