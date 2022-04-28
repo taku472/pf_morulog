@@ -11,20 +11,13 @@
             <strong><i class="far fa-flag"></i><span><%= @post.title %></span></strong>
           </p>
           <p class="card-text">説明：<%= @post.body %></p>
+          <p class="card-genre">ジャンル：<%= @post.genre.name %></p>
           <span><i class="fas fa-user"></i> By <%= @post.customer.full_name %>　|　</span>
           <span><i class="fa fa-calendar"></i><%= @post.created_at.strftime('%Y/%m/%d') %>　|　</span>
           <span><i class="fa fa-comment"></i><%= @post.comments.count %>　|　 </span>
-          <% if @post.favorited_by?(current_customer) %>
-              <%= link_to public_post_favorites_path(@post), method: :delete do %>
-                <span><i class="fa fa-heart"></i><%= @post.favorites.count %></span>
-              <% end %>
-              　|
-            <% else %>
-              <%= link_to public_post_favorites_path(@post), method: :post do %>
-                <span><i class="fa fa-heart"></i><%= @post.favorites.count %></span>
-              <% end %>
-              　|
-          <% end %>
+          <div id="favorite_<%= @post.id %>" class="d-inline">
+            <%= render partial: "public/favorites/favorites", locals: { post: @post } %>
+          </div>
           <% if @post.customer == current_customer %>
             <span><%= link_to "削除", public_post_path(@post), method: :delete %></span>
           <% end %>
@@ -34,6 +27,33 @@
       <div class="comments card-text">
         <h4 class="mt-3"><%= @post.comments.count %>件コメント</h4>
       </div>
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>氏名</th>
+            <th>コメント</th>
+            <th colspan=""></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @post.comments.each do |comment| %>
+            <tr>
+              <td><%= comment.customer.full_name %></td>
+              <td><%= comment.body %></td>
+              <td>
+                <% if current_customer == comment.customer %>
+                  <%= link_to "削除", public_post_path(@post), method: :delete %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% if @comment.customer == current_customer %>
+        <%= link_to "削除", public_post_comment_path(comment.post, comment), method: :delete %>
+      <% end %>
       <hr>
       <%= form_with model: [:public, @post, @comment] do |f| %>
       <div class="form-group">

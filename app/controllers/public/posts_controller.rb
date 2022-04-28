@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   def new
+    @genres = Genre.all
     @post = Post.new
   end
 
@@ -15,11 +16,14 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.page(params[:page])
+    @genres = Genre.all
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+    @comments = Comment.all
+    @genres = Genre.all
   end
 
   def destroy
@@ -31,6 +35,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:posted_image, :title, :body)
+    params.require(:post).permit(:image, :title, :body, :genre_id, :name)
   end
 end

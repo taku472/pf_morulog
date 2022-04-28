@@ -1,11 +1,13 @@
 class Post < ApplicationRecord
   has_one_attached :image
   belongs_to :customer
+  belongs_to :genre
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_customers, through: :favorites, source: :customer
 
   validates :title, presence: true
-  validates :posted_image, presence: true
+  validates :image, presence: true
 
   def get_image
     unless image.attached?
@@ -22,13 +24,11 @@ class Post < ApplicationRecord
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
-      @post = Post.where("title LIKE?","#{word}")
+      @post = Post.where(title: word)
     elsif search == "forward_match"
       @post = Post.where("title LIKE?","#{word}%")
     elsif search == "backward_match"
       @post = Post.where("title LIKE?","%#{word}")
-    elsif search == "partial_match"
-      @post = Post.where("title LIKE?","%#{word}%")
     else
       @post = Post.all
     end

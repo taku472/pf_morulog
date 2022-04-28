@@ -1,4 +1,4 @@
-class Public::CommentsController < ApplicationController
+class Public::CommentsController < Public::ApplicationController
   def create
     post = Post.find(params[:post_id])
     comment = current_customer.comments.new(comment_params)

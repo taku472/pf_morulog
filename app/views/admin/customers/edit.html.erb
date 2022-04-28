@@ -1,0 +1,25 @@
+<div class='container mt-5 '>
+  <h2>登録情報編集</h2>
+  <%= form_with model:@customer, url: admin_customer_path(@customer), local:true do |f| %>
+
+    <p><%= f.label :"会員ID#{@customer.id}" %></p>
+    <p><%= f.label :"姓", class: "col-sm-2" %>
+      <%= f.text_field :first_name, autofocus: true %></p>
+    <p><%= f.label :"名", class: "col-sm-2" %>
+      <%= f.text_field :last_name %></p>
+    <p><%= f.label :"メールアドレス", class: "col-sm-2" %>
+      <%= f.text_field :email %></p>
+    <p><%= f.label :"誕生日", class: "col-sm-2" %>
+      <%= f.text_field :birthday %></p>
+
+    <%= f.label :会員ステータス, class: "ml-3" %>
+      <p>
+        <%= f.radio_button :is_deleted, :false %>
+        <%= f.label :is_deleted, "有効会員" %>text-white
+        <%= f.radio_button :is_deleted, :true %>
+        <%= f.label :is_deleted, "退会済み" %>
+      </p>
+
+   <%= f.submit '更新する', class: "btn btn-sm btn-success" %>
+  <% end %>
+</div>

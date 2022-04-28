@@ -1,5 +1,5 @@
-class Public::HomesController < ApplicationController
+class Public::HomesController < Public::ApplicationController
   def top
-    
+    @genres = Genre.all
   end
 end

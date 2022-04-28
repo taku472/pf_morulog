@@ -1,20 +1,51 @@
-<div class="col-md-6 mx-auto mt-5">
-  <h1>welcome to <strong>Morulog</strong> !!</h1>
-  <p>
-    In
-    <span class="glyphicon glyphicon-book"></span>
-    <strong>Morulog</strong>
-    ,
-  </p>
-  <p>
-    An SNS community that talks about the charm of guinea pig lovers.
-  </p>
-  <div class="row">
-    <div class="ml-3">
-      <%= link_to "Log in", new_customer_session_path, class: "btn btn-info" %>
-    </div>
-    <div class="ml-3">
-      <%= link_to "Sign up", new_customer_registration_path, class: "btn btn-success" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+        <section class="main-visual mt-4">
+          <div class="mv-text">
+            <h3 class=text-center>ようこそ、Morulogへ！</h3><br>
+          <div>
+        </section>
+        <div class="row justify-content-center">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <%= image_tag asset_path("IMG_1"), size: "500x300" %>
+                  <div class="carousel-caption d-none d-md-block">
+                <h5>Morulog</h5>
+                <p>モルモットについて語り合うコミュニティサイトです！</p>
+              </div>
+                </div>
+                <div class="carousel-item">
+                  <%= image_tag asset_path("IMG_2"), size: "500x300" %>
+                  <div class="carousel-caption d-none d-md-block">
+                <h5>集団行動大好き！</h5>
+                <p>前を歩くモルモットについていくところが愛らしい！</p>
+              </div>
+                </div>
+                <div class="carousel-item">
+                  <%= image_tag asset_path("IMG_3"), size: "500x300" %>
+                  <div class="carousel-caption d-none d-md-block">
+                <h5>ふとした瞬間</h5>
+                <p>ぼーっとしてる時が多いけど俊敏な一面も！</p>
+              </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+          </div>
+        </div>
     </div>
   </div>
 </div>

@@ -1,2 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Zen+Maru+Gothic&display=swap');
+
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+main {
+ background-image: url('../images/IMG_7.jpg');
+ background-size: cover;
+}

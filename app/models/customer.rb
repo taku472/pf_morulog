@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :post
 
   has_one_attached :profile_image
 
@@ -25,15 +26,17 @@ class Customer < ApplicationRecord
   #検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
-      @customer = Customer.where("full_name LIKE?", "#{word}")
+      @customer = Customer.where(first_name: word)
     elsif search == "forward_match"
-      @customer = Customer.where("full_name LIKE?", "#{word}%")
+      @customer = Customer.where("first_name LIKE?", "#{word}%")
     elsif search == "backward_match"
-      @user = User.where("full_name LIKE?","%#{word}")
-    elsif search == "partial_match"
-      @user = User.where("full_name LIKE?","%#{word}%")
+      @customer = Customer.where("last_name LIKE?","%#{word}")
     else
-      @user = User.all
+      @customer = Customer.all
     end
+  end
+
+  def favorited_by?(post_id)
+    favorites.where(post_id: post_id).exists?
   end
 end

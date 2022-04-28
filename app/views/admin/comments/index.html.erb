@@ -1,0 +1,23 @@
+<div class="container mt-5 ">
+  <h2>コメント一覧</h2>
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th>コメントID</th>
+        <th>氏名</th>
+        <th>コメント</th>
+        <th colspan=""></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.id %></td>
+          <td><%= comment.customer.full_name %></td>
+          <td><%= comment.body %></td>
+          <td><%= link_to "削除", admin_comment_path(comment), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
