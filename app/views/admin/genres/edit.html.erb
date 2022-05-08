@@ -6,6 +6,7 @@
         <div class="field row">
           <lavel>ジャンル</lavel>
           <%= f.text_field :name %>
+          <%= link_to "削除する" , admin_genres_path(@genre.id), method: :delete %>
           <%= f.submit "変更を保存する", class: "btn btn-primary" %>
          </div>
       <% end %>

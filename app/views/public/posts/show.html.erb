@@ -18,6 +18,9 @@
           <div id="favorite_<%= @post.id %>" class="d-inline">
             <%= render partial: "public/favorites/favorites", locals: { post: @post } %>
           </div>
+          <% @post.tags.each do |tag| %>
+            <span><%= tag.name %></span>
+          <% end %>
           <% if @post.customer == current_customer %>
             <span><%= link_to "削除", public_post_path(@post), method: :delete %></span>
           <% end %>

@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "homes#top"
     resources :posts
-    resources :genres
+    resources :genres, only: [:index, :create, :edit, :update, :destroy,]
     resources :comments, only: [:index, :destroy]
     resources :customers, only: [:index, :show, :edit, :update]
   end

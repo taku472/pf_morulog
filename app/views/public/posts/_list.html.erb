@@ -18,6 +18,9 @@
           <p class="card-text">説明：<%= post.body %></p>
           <span><i class="fas fa-user"></i> By <%= post.customer.full_name %> | </span>
           <span><%= link_to "#{post.comments.count}コメント",public_post_path(post.id), class:"text-dark" %></span>
+          <% post.tags.each do |tag| %>
+            <span><%= tag.name %></span>
+          <% end %>
         </div>
       </div>
     </div>

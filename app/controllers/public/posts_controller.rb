@@ -7,16 +7,19 @@ class Public::PostsController < ApplicationController
   def create
     @post =Post.new(post_params)
     @post.customer_id = current_customer.id
-    if @post.save
-      redirect_to public_posts_path(current_customer)
-    else
-      render :new
+    @post.save
+    tags = Vision.get_image_data(@post.image)
+    tags.each do |tag|
+      @post.tags.create(name: tag)
     end
+    
+    redirect_to public_posts_path(current_customer)
   end
 
   def index
     @posts = Post.page(params[:page])
     @genres = Genre.all
+    @tag_post = Tag.all
   end
 
   def show
