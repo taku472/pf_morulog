@@ -9,14 +9,16 @@ class Public::PostsController < ApplicationController
     @post.customer_id = current_customer.id
     @post.save
     tags = Vision.get_image_data(@post.image)
-    tags.each do |tag|
-      t = Tag.find_by(name: tag)
-      if t == nil
-        @post.tags.create(name: tag)
-      else
-        @post.tags.create(t)
-      end
-    end
+    @post.tags_save(tags)
+#    tags.each do |tag|
+#      t = Tag.find_by(name: tag)
+#      if t == nil
+#        @post.tags.create(name: tag)
+#      else
+#        byebug
+#        PostTag.create(tag: t, post: @post)
+#      end
+#    end
     
     redirect_to public_posts_path(current_customer)
   end

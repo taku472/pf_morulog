@@ -23,6 +23,13 @@ class Post < ApplicationRecord
     favorites.exists?(customer_id: customer.id)
   end
 
+  def tags_save(tags)
+    tags.each do |tag|
+      t = Tag.where(name: tag).first_or_create
+      self.tags << t
+    end
+  end
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
